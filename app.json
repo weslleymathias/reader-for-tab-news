@@ -4,7 +4,8 @@
     "slug": "reader-for-tab-news",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "scheme": "readerfortabnews",
+    "icon": "./,assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true
@@ -23,7 +24,9 @@
     },
     "plugins": [
       "expo-font",
-      "expo-splash-screen"
+      "expo-splash-screen",
+      "expo-router",
+      "expo-status-bar"
     ]
   }
 }
