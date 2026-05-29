@@ -24,20 +24,11 @@ export default function RootLayout() {
     if (!loaded && !error) return null;
 
     return (
-        <View style={styles.container}>
-            <Text style={{ fontFamily: 'interBold' }}>Hello world!</Text>
-            <StatusBar style="auto" />
+        <>
+            <StatusBar style="dark" />
 
             <Stack />
-        </View>
+        </>
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-});
