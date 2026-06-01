@@ -4,7 +4,7 @@ export default function LatestTab() {
 
     return (
         <View className="bg-background">
-            <Text className="text-text text-2xl font-family-bold">Tab 2</Text>
+            <Text className="text-text text-base font-family-regular">Tab 2</Text>
         </View>
     );
 }

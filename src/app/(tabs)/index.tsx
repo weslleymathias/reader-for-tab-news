@@ -4,7 +4,7 @@ export default function ImportsTab() {
 
     return (
         <View className="bg-background">
-            <Text className="text-text text-2xl font-family-bold">Tab 1</Text>
+            <Text className="text-text text-base font-family-regular">Tab 1</Text>
         </View>
     );
 }
