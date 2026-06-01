@@ -3,8 +3,8 @@ import { Text, View } from "react-native";
 export default function ImportsTab() {
 
     return (
-        <View>
-            <Text>Tab 1</Text>
+        <View className="bg-blue-500">
+            <Text className="text-red-500">Tab 1 de teste</Text>
         </View>
     );
 }
