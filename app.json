@@ -6,7 +6,8 @@
     "orientation": "portrait",
     "scheme": "readerfortabnews",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#15181D",
     "ios": {
       "supportsTablet": true
     },

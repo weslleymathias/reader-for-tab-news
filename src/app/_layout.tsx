@@ -26,13 +26,13 @@ export default function RootLayout() {
     if (!loaded && !error) return null;
 
     return (
-        <>
-            <StatusBar style="dark" />
+        <View className="flex-1 bg-background">
+            <StatusBar style="light" />
 
-            <Stack>
+            <Stack screenOptions={{ contentStyle: { backgroundColor: 'transparent' } }}>
                 <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
             </Stack>
-        </>
+        </View>
     );
 }
 

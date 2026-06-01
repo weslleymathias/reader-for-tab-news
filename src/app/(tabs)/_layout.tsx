@@ -9,14 +9,14 @@ export default function TabsLayout() {
     const insets = useSafeAreaInsets();
 
     return (
-        <Tabs style={{ paddingBottom: insets.bottom, flex: 1 }}>
+        <Tabs style={{ paddingBottom: insets.top, flex: 1 }}>
             <TabSlot />
             <TabList style={{ backgroundColor: DarkTheme.colors.paper, paddingBottom: insets.bottom }}>
                 <TabTrigger name="imports" href="/">
-                    <Text>Relevantes</Text>
+                    <Text className='text-text'>Relevantes</Text>
                 </TabTrigger>
                 <TabTrigger name="latests" href="/latest">
-                    <Text>Recentes</Text>
+                    <Text className='text-text'>Recentes</Text>
                 </TabTrigger>
             </TabList>
         </Tabs>
