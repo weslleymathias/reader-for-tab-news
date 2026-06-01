@@ -1,5 +1,5 @@
-import { Tabs, TabList, TabTrigger, TabSlot } from 'expo-router/ui';
-import { Text } from 'react-native';
+import { Tabs, TabList, TabTrigger, TabSlot, TabTriggerSlotProps } from 'expo-router/ui';
+import { Pressable, Text } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DarkTheme } from '../../shared/themes/DarkTheme';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -20,26 +20,37 @@ export default function TabsLayout() {
                 alignItems: 'center',
                 justifyContent: 'space-around'
             }}>
-                <TabTrigger name="imports" href="/" style={{
-                    paddingHorizontal: 8,
-                    gap: 8,
-                    alignItems: 'center',
-                    justifyContent: 'center'
-
-                }}>
-                    <MaterialIcons name="newspaper" size={24} color={DarkTheme.colors.text} />
-                    <Text className='text-text'>Relevantes</Text>
+                <TabTrigger name="imports" href="/" asChild>
+                    <CustomTabButton iconName='newspaper' label='Relevantes' />
                 </TabTrigger>
-                <TabTrigger name="latests" href="/latest" style={{
-                    paddingHorizontal: 8,
-                    gap: 8,
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <MaterialIcons name="new-releases" size={24} color={DarkTheme.colors.text} />
-                    <Text className='text-text'>Recentes</Text>
+                <TabTrigger name="latests" href="/latest" asChild>
+                    <CustomTabButton iconName='new-releases' label='Recentes' />
                 </TabTrigger>
             </TabList>
         </Tabs>
+    );
+}
+
+type TCustomTabProps = TabTriggerSlotProps & {
+    label: string;
+    iconName: string;
+};
+
+
+const CustomTabButton = ({ isFocused, iconName, label, ...props }: TCustomTabProps) => {
+    return (
+        <Pressable
+            {...props}
+            style={{
+                paddingHorizontal: 8,
+                gap: 8,
+                alignItems: 'center',
+                justifyContent: 'center'
+
+            }}>
+            <MaterialIcons name={iconName as 'style'} size={24} color={isFocused ? DarkTheme.colors.highlight : DarkTheme.colors.text} />
+            <Text className={isFocused ? 'text-highlight' : 'text-text'}>{label}</Text>
+
+        </Pressable>
     );
 }
