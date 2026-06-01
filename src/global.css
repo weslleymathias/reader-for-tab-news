@@ -3,3 +3,21 @@
 @import "tailwindcss/utilities.css";
  
 @import "nativewind/theme";
+
+@theme {
+
+    --font-family-regular: "interRegular", sans-serif;
+    --font-family-bold: "interBold", sans-serif;
+
+    --text-sm: 10px;
+    --text-base: 12px;
+    --text-large: 16px;
+
+    --color-background: #15181D;
+    --color-text: #F0F6FC;
+    --color-border: #3D444D;
+    --color-paper: #151B23;
+    --color-textMuted: #9198A1;
+    --color-highlight: #388BFD;
+    --color-textHighlight: #388BFD;
+}
