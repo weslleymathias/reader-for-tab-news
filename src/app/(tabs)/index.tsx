@@ -7,9 +7,8 @@ export default function ImportsTab() {
     return (
         <View className="bg-background">
 
-            <Header title="Relevantes" />
-
             <NewsList
+                header={<Header title="Relevantes" />}
                 onItemPress={console.log}
                 items={[
                     {

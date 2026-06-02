@@ -11,15 +11,17 @@ interface INewsListItem {
 
 interface INewsListProps {
     items: INewsListItem[];
+    header: React.ReactElement;
     onItemPress(item: INewsListItem): void;
 }
 
-export const NewsList = ({ items, onItemPress }: INewsListProps) => {
+export const NewsList = ({ items, header, onItemPress }: INewsListProps) => {
 
     return (
         <FlatList
             data={items}
             keyExtractor={(item) => item.id}
+            ListHeaderComponent={header}
             renderItem={({ item, index }) => (
                 <ListItem
                     authorName="lvsouzadev"

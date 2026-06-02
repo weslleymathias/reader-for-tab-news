@@ -1,27 +1,215 @@
-import { ScrollView, Text, View } from "react-native";
+import { View } from "react-native";
 import { Header } from "../../shared/components/Header";
-import { ListItem } from "../../shared/components/ListItem";
+import { NewsList } from "../../shared/components/NewsList";
 
 export default function LatestTab() {
 
     return (
         <View className="bg-background">
 
-            <ScrollView>
-                <Header title="Recentes" />
+            <NewsList
+                header={<Header title="Recentes" />}
+                onItemPress={console.log}
+                items={[
+                    {
+                        id: '1',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '2',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '3',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '4',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '5',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '6',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '7',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '8',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '9',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '10',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '11',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '12',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '13',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '14',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '15',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '16',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '17',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '18',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '19',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '20',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '21',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '22',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '23',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '24',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '25',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '26',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '27',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                    {
+                        id: '28',
+                        authorName: "lvsouzadev",
+                        numberOfComments: 4,
+                        publishedAt: new Date(),
+                        title: "Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
+                    },
+                ]}
+            />
 
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(() => (
-                    <ListItem
-                        authorName="lvsouzadev"
-                        position={1}
-                        numberOfComments={4}
-                        publishedAt={new Date()}
-                        title="Falar em Inglês: Criei um MICRO SAAS com 💵 40,00 REAIS em DUAS semanas"
-                        onPress={() => console.log('Pressionado')}
-                    />
-                ))}
-
-            </ScrollView>
         </View>
     );
 }
