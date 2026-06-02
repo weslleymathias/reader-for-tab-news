@@ -3,7 +3,7 @@ import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { DarkTheme } from "../themes/DarkTheme";
 
-interface IListItemProps {
+interface INewListItemProps {
     position: number;
     title: string;
     publishedAt: Date;
@@ -12,14 +12,12 @@ interface IListItemProps {
     onPress(): void;
 }
 
-export const ListItem = ({ position, title, publishedAt, authorName, numberOfComments, onPress }: IListItemProps) => {
+export const NewsListItem = ({ position, title, publishedAt, authorName, numberOfComments, onPress }: INewListItemProps) => {
 
     return (
         <Pressable
             onPress={onPress}
-            className="flex-row gap-2 px-4 py-2"
             style={(state) => {
-
                 if (state.pressed) return {
                     gap: 8,
                     borderRadius: 10,
@@ -40,7 +38,7 @@ export const ListItem = ({ position, title, publishedAt, authorName, numberOfCom
                 {position}.
             </Text>
 
-            <View className="gap-1">
+            <View className="gap-1 flex-1">
                 <Text className="text-text font-family-regular text-base">
                     {title}.
                 </Text>
@@ -58,6 +56,27 @@ export const ListItem = ({ position, title, publishedAt, authorName, numberOfCom
                 </View>
             </View>
         </Pressable>
+    );
+
+}
+
+export const NewsListItemSkeleton = () => {
+
+    return (
+        <View className="flex-row gap-2 w-full px-4 py-2">
+
+            <View className="w-6 h-4 rounded-sm bg-gray-500 animate-pulse" />
+
+            <View className="gap-1 flex-1">
+                <View className="w-full h-6 rounded-sm bg-gray-500 animate-pulse" />
+
+                <View className="flex-row gap-2">
+                    <View className="w-20 h-4 rounded-sm bg-gray-800 animate-pulse" />
+                    <View className="w-20 h-4 rounded-sm bg-gray-800 animate-pulse" />
+                    <View className="w-20 h-4 rounded-sm bg-gray-800 animate-pulse" />
+                </View>
+            </View>
+        </View>
     );
 
 }
