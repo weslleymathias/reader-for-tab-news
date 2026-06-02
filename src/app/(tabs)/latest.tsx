@@ -10,6 +10,11 @@ export default function LatestTab() {
             <NewsList
                 header={<Header title="Recentes" />}
                 onItemPress={console.log}
+                onRefresh={() => console.log('Recarregando')}
+                onLoadNext={() => console.log('Carrega a próxima página')}
+                isRefreshing={false}
+                isLoadingNext={false}
+                isFirstLoading={false}
                 items={[
                     {
                         id: '1',

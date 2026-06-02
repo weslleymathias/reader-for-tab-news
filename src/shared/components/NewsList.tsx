@@ -13,13 +13,20 @@ interface INewsListProps {
     items: INewsListItem[];
     header: React.ReactElement;
     onItemPress(item: INewsListItem): void;
+    onRefresh(): void;
+    isRefreshing: boolean;
+    onLoadNext(): void;
+    isLoadingNext: boolean;
+    isFirstLoading: boolean;
 }
 
-export const NewsList = ({ items, header, onItemPress }: INewsListProps) => {
+export const NewsList = ({ items, header, onItemPress, onRefresh, isRefreshing, onLoadNext, isLoadingNext, isFirstLoading }: INewsListProps) => {
 
     return (
         <FlatList
             data={items}
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
             keyExtractor={(item) => item.id}
             ListHeaderComponent={header}
             renderItem={({ item, index }) => (
@@ -32,6 +39,8 @@ export const NewsList = ({ items, header, onItemPress }: INewsListProps) => {
                     onPress={() => onItemPress(item)}
                 />
             )}
+            onEndReachedThreshold={1}
+            onEndReached={onLoadNext}
         />
     );
 
