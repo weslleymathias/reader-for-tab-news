@@ -7,8 +7,10 @@ interface IHeaderProps {
 export const Header = ({ title }: IHeaderProps) => {
 
     return (
-        <View>
-            <Text className="text-text font-family-bold px-2 py-4 items-center justify-center"></Text>
+        <View className="px-2 py-4 items-center justify-center">
+            <Text className="text-text font-family-bold text-base">
+                {title}
+            </Text>
         </View>
     );
 
