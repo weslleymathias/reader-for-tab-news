@@ -1,8 +1,16 @@
 import { ScrollView, View } from "react-native";
 import { Header } from "../../shared/components/Header";
 import { NewsList } from "../../shared/components/NewsList";
+import { useEffect } from "react";
+import { TabNewsApi } from "../../shared/services/tabnews";
 
 export default function ImportsTab() {
+
+    useEffect(() => {
+
+        TabNewsApi.contents.listContents();
+
+    }, []);
 
     return (
         <View className="bg-background">
