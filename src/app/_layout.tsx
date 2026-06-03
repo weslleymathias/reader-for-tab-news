@@ -4,10 +4,13 @@ import { StyleSheet, Text, View } from "react-native";
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from "react";
 import { Stack } from 'expo-router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import "./../global.css";
 
 SplashScreen.preventAutoHideAsync();
+
+const queryClient = new QueryClient();
 
 export default function RootLayout() {
 
@@ -26,13 +29,15 @@ export default function RootLayout() {
     if (!loaded && !error) return null;
 
     return (
-        <View className="flex-1 bg-background">
-            <StatusBar style="light" />
+        <QueryClientProvider client={queryClient}>
+            <View className="flex-1 bg-background">
+                <StatusBar style="light" />
 
-            <Stack screenOptions={{ contentStyle: { backgroundColor: 'transparent' } }}>
-                <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-            </Stack>
-        </View>
+                <Stack screenOptions={{ contentStyle: { backgroundColor: 'transparent' } }}>
+                    <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+                </Stack>
+            </View>
+        </QueryClientProvider>
     );
 }
 

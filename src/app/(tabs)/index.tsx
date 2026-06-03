@@ -1,47 +1,35 @@
 import { ScrollView, View } from "react-native";
 import { Header } from "../../shared/components/Header";
 import { NewsList } from "../../shared/components/NewsList";
-import { useCallback, useEffect, useState } from "react";
 import { TabNewsApi } from "../../shared/services/tabnews";
-import { TContentItemResult } from "../../shared/services/tabnews/contents/ListContents";
+import { TContentResult } from "../../shared/services/tabnews/contents/ListContents";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-export default function ImportsTab() {
+export default function ImportantTab() {
 
-    const [news, setNews] = useState<TContentItemResult[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isRefreshing, setIsRefreshing] = useState(false);
-    const [page, setPage] = useState(1);
-    const [perPage] = useState(30);
-    const [totalCount, setTotalCount] = useState(30);
+    const { data: news, isLoading, isRefetching, refetch, fetchNextPage, hasNextPage } = useInfiniteQuery<TContentResult>({
+        queryKey: ['news', { strategy: 'relevant' }],
+        queryFn: async ({ pageParam }) => {
+            const result = await TabNewsApi.contents.listContents({
+                perPage: 30,
+                page: pageParam as number,
+            });
 
-    const handleFetchNews = useCallback((perPage: number, page: number) => {
-        TabNewsApi.contents.listContents({ perPage, page }).then(result => {
-            setTotalCount(result.totalCount);
+            return result;
+        },
+        getNextPageParam: (lastPage, _allPages, lastPageParam, _allPageParams) => {
+            const lastPageNumber = lastPageParam as number;
 
-            if (page === 1) {
-                setNews(result.data);
-            } else {
-                setNews(old => {
-                    return [
-                        ...old,
-                        ...result.data.filter(newItem => !old.some(oldItem => oldItem.id === newItem.id)),
-                    ];
-                });
+            if (lastPage.totalCount > (lastPageNumber * 30)) {
+                return lastPageNumber + 1;
             }
 
-        })
-            .finally(() => {
-                setIsLoading(false);
-                setIsRefreshing(false);
-            });
-    }, []);
+            return undefined;
+        },
+        initialPageParam: 1,
+    });
 
-    useEffect(() => {
-        setIsLoading(true);
-        handleFetchNews(perPage, page);
-    }, [handleFetchNews, perPage, page]);
-
-    console.log(page);
+    const allNews = (news?.pages || []).flatMap(page => page.data);
 
 
     return (
@@ -50,21 +38,20 @@ export default function ImportsTab() {
             <NewsList
                 header={<Header title="Relevantes" />}
                 onItemPress={console.log}
-                onRefresh={() => {
-                    setIsRefreshing(true);
-                    setPage(1);
-                }}
-                onLoadNext={() => setPage(page + 1)}
-                isRefreshing={isRefreshing}
-                disableLoadNext={totalCount < (page * perPage)}
-                isFirstLoading={isLoading && news.length === 0}
-                items={news.map(newsItem => ({
-                    id: newsItem.id,
-                    title: newsItem.title,
-                    publishedAt: newsItem.created_at,
-                    authorName: newsItem.owner_username,
-                    numberOfComments: newsItem.children_deep_count,
-                }))}
+                onRefresh={() => { refetch() }}
+                onLoadNext={() => fetchNextPage()}
+                isRefreshing={isRefetching}
+                disableLoadNext={!hasNextPage}
+                isFirstLoading={isLoading}
+                items={
+                    allNews.map(newsItem => ({
+                        id: newsItem.id,
+                        title: newsItem.title,
+                        publishedAt: newsItem.created_at,
+                        authorName: newsItem.owner_username,
+                        numberOfComments: newsItem.children_deep_count,
+                    }))
+                }
             />
 
         </View>

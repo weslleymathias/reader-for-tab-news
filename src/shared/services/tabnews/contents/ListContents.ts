@@ -55,7 +55,7 @@ export const listContents = async (params?: IListContentsParams): Promise<TConte
 
     return {
         totalCount: headers['x-pagination-total-rows'] || 30,
-        data.map(newsListItem => ({
+        data: data.map(newsListItem => ({
             ...newsListItem,
             created_at: parseISO(newsListItem.created_at),
             updated_at: parseISO(newsListItem.updated_at),
