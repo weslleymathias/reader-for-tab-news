@@ -10,22 +10,25 @@ export default function ImportsTab() {
     const [news, setNews] = useState<TContentItemResult[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isRefreshing, setIsRefreshing] = useState(false);
+    const [page, setPage] = useState(1);
+    const [perPage] = useState(30);
 
-    const handleFetchNews = useCallback(() => {
-        TabNewsApi.contents.listContents().then(result => {
-            setNews(result);
+    const handleFetchNews = useCallback((perPage: number, page: number) => {
+        TabNewsApi.contents.listContents({ perPage, page }).then(result => {
+            setNews(old => [...old, ...result]);
         })
             .finally(() => {
                 setIsLoading(false);
                 setIsRefreshing(false);
             });
-    }, [])
+    }, []);
 
     useEffect(() => {
         setIsLoading(true);
-        handleFetchNews();
-    }, [handleFetchNews]);
+        handleFetchNews(perPage, page);
+    }, [handleFetchNews, perPage, page]);
 
+    console.log(page);
 
 
     return (
@@ -38,7 +41,7 @@ export default function ImportsTab() {
                     setIsRefreshing(true);
                     handleFetchNews();
                 }}
-                onLoadNext={() => console.log('Carrega a próxima página')}
+                onLoadNext={() => setPage(page + 1)}
                 isRefreshing={isRefreshing}
                 isLoadingNext={isLoading && news.length > 0}
                 isFirstLoading={isLoading && news.length === 0}

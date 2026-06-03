@@ -34,9 +34,21 @@ export type TContentItemResult = Omit<IContentItem, 'created_at' | 'updated_at' 
 
 export type TContentList = TContentItemResult[];
 
-export const listContents = async (): Promise<TContentList> => {
+interface IListContentsParams {
+    page: number;
+    perPage: number;
+    strategy: 'new' | 'old' | 'relevant';
+}
 
-    const { data } = await axiosInstance.get<IContentItem>('/contents');
+export const listContents = async (params?: IListContentsParams): Promise<TContentList> => {
+
+    const { data } = await axiosInstance.get<IContentItem>('/contents', {
+        params: {
+            page: params?.page,
+            perPage: params?.perPage,
+            strategy: params?.strategy,
+        },
+    });
 
     return data.map(newsListItem => ({
         ...newsListItem,
