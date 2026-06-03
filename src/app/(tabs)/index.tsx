@@ -13,6 +13,7 @@ export default function ImportantTab() {
             const result = await TabNewsApi.contents.listContents({
                 perPage: 30,
                 page: pageParam as number,
+                strategy: 'relevant',
             });
 
             return result;
@@ -38,7 +39,7 @@ export default function ImportantTab() {
             <NewsList
                 header={<Header title="Relevantes" />}
                 onItemPress={console.log}
-                onRefresh={() => { refetch() }}
+                onRefresh={() => refetch()}
                 onLoadNext={() => fetchNextPage()}
                 isRefreshing={isRefetching}
                 disableLoadNext={!hasNextPage}

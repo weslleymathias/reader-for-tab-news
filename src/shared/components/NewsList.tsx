@@ -31,7 +31,7 @@ export const NewsList = ({ items, header, onItemPress, onRefresh, isRefreshing, 
             ListHeaderComponent={header}
             renderItem={({ item, index }) => (
                 <NewsListItem
-                    authorName="lvsouzadev"
+                    authorName={item.authorName}
                     position={index + 1}
                     numberOfComments={item.numberOfComments}
                     publishedAt={item.publishedAt}
@@ -41,7 +41,7 @@ export const NewsList = ({ items, header, onItemPress, onRefresh, isRefreshing, 
             )}
             ListFooterComponent={!disableLoadNext ? (
                 <>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((_, index) => <NewsListItemSkeleton key={index} />)}
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((_, index) => (<NewsListItemSkeleton key={index} />))}
                 </>
             )
                 : undefined
