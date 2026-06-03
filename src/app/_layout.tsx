@@ -5,12 +5,27 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from "react";
 import { Stack } from 'expo-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
+import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister'
 
 import "./../global.css";
 
 SplashScreen.preventAutoHideAsync();
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: 1000 * 60,  //1min
+            gcTime: 24 * 60 * 60 * 1000,  //24h
+        }
+    },
+});
+
+const asyncStoragePersister = createAsyncStoragePersister({
+    storage: AsyncStorage,
+})
+
 
 export default function RootLayout() {
 
@@ -29,7 +44,12 @@ export default function RootLayout() {
     if (!loaded && !error) return null;
 
     return (
-        <QueryClientProvider client={queryClient}>
+        <PersistQueryClientProvider
+            client={queryClient}
+            persistOptions={{
+                persister: asyncStoragePersister,
+                maxAge: 24 * 60 * 60 * 1000, //24h
+            }}>
             <View className="flex-1 bg-background">
                 <StatusBar style="light" />
 
@@ -37,7 +57,7 @@ export default function RootLayout() {
                     <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
                 </Stack>
             </View>
-        </QueryClientProvider>
+        </PersistQueryClientProvider>
     );
 }
 
