@@ -8,7 +8,9 @@ export default function ImportsTab() {
 
     useEffect(() => {
 
-        TabNewsApi.contents.listContents();
+        TabNewsApi.contents.listContents().then(result => {
+            console.log(result);
+        });
 
     }, []);
 
