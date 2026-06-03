@@ -16,8 +16,19 @@ export default function ImportsTab() {
 
     const handleFetchNews = useCallback((perPage: number, page: number) => {
         TabNewsApi.contents.listContents({ perPage, page }).then(result => {
-            setNews(old => [...old, ...result.data]);
             setTotalCount(result.totalCount);
+
+            if (page === 1) {
+                setNews(result.data);
+            } else {
+                setNews(old => {
+                    return [
+                        ...old,
+                        ...result.data.filter(newItem => !old.some(oldItem => oldItem.id === newItem.id)),
+                    ];
+                });
+            }
+
         })
             .finally(() => {
                 setIsLoading(false);
@@ -41,7 +52,7 @@ export default function ImportsTab() {
                 onItemPress={console.log}
                 onRefresh={() => {
                     setIsRefreshing(true);
-                    handleFetchNews();
+                    setPage(1);
                 }}
                 onLoadNext={() => setPage(page + 1)}
                 isRefreshing={isRefreshing}
