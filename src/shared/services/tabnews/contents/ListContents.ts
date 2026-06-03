@@ -25,7 +25,7 @@ export interface IContentItem {
     updated_at: string;
 }
 
-type TContentItemResult = Omit<IContentItem, 'created_at' | 'updated_at' | 'published_at' | 'deleted_at'> & {
+export type TContentItemResult = Omit<IContentItem, 'created_at' | 'updated_at' | 'published_at' | 'deleted_at'> & {
     created_at: Date;
     updated_at: Date;
     published_at: Date;
