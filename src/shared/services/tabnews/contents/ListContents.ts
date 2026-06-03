@@ -32,7 +32,10 @@ export type TContentItemResult = Omit<IContentItem, 'created_at' | 'updated_at' 
     deleted_at: Date;
 }
 
-export type TContentList = TContentItemResult[];
+export type TContentResult = {
+    totalCount: number;
+    data: TContentItemResult[];
+};
 
 interface IListContentsParams {
     page: number;
@@ -40,9 +43,9 @@ interface IListContentsParams {
     strategy: 'new' | 'old' | 'relevant';
 }
 
-export const listContents = async (params?: IListContentsParams): Promise<TContentList> => {
+export const listContents = async (params?: IListContentsParams): Promise<TContentResult> => {
 
-    const { data } = await axiosInstance.get<IContentItem>('/contents', {
+    const { data, headers } = await axiosInstance.get<IContentItem>('/contents', {
         params: {
             page: params?.page,
             perPage: params?.perPage,
@@ -50,11 +53,14 @@ export const listContents = async (params?: IListContentsParams): Promise<TConte
         },
     });
 
-    return data.map(newsListItem => ({
-        ...newsListItem,
-        created_at: parseISO(newsListItem.created_at),
-        updated_at: parseISO(newsListItem.updated_at),
-        published_at: parseISO(newsListItem.published_at),
-        deleted_at: newsListItem.deleted_at ? parseISO(newsListItem.deleted_at) : null,
-    }));
+    return {
+        totalCount: headers['x-pagination-total-rows'] || 30,
+        data.map(newsListItem => ({
+            ...newsListItem,
+            created_at: parseISO(newsListItem.created_at),
+            updated_at: parseISO(newsListItem.updated_at),
+            published_at: parseISO(newsListItem.published_at),
+            deleted_at: newsListItem.deleted_at ? parseISO(newsListItem.deleted_at) : null,
+        }))
+    };
 }

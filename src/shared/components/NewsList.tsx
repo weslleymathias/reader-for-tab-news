@@ -16,11 +16,11 @@ interface INewsListProps {
     onRefresh(): void;
     isRefreshing: boolean;
     onLoadNext(): void;
-    isLoadingNext: boolean;
     isFirstLoading: boolean;
+    disableLoadNext: boolean;
 }
 
-export const NewsList = ({ items, header, onItemPress, onRefresh, isRefreshing, onLoadNext, isLoadingNext, isFirstLoading }: INewsListProps) => {
+export const NewsList = ({ items, header, onItemPress, onRefresh, isRefreshing, onLoadNext, disableLoadNext, isFirstLoading }: INewsListProps) => {
 
     return (
         <FlatList
@@ -39,7 +39,7 @@ export const NewsList = ({ items, header, onItemPress, onRefresh, isRefreshing, 
                     onPress={() => onItemPress(item)}
                 />
             )}
-            ListFooterComponent={isFirstLoading || isLoadingNext ? (
+            ListFooterComponent={!disableLoadNext ? (
                 <>
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((_, index) => <NewsListItemSkeleton key={index} />)}
                 </>
@@ -47,7 +47,7 @@ export const NewsList = ({ items, header, onItemPress, onRefresh, isRefreshing, 
                 : undefined
             }
             onEndReachedThreshold={1}
-            onEndReached={isFirstLoading || isLoadingNext ? undefined : onLoadNext}
+            onEndReached={!disableLoadNext ? undefined : onLoadNext}
         />
     );
 

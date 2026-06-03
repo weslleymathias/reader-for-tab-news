@@ -12,10 +12,12 @@ export default function ImportsTab() {
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [page, setPage] = useState(1);
     const [perPage] = useState(30);
+    const [totalCount, setTotalCount] = useState(30);
 
     const handleFetchNews = useCallback((perPage: number, page: number) => {
         TabNewsApi.contents.listContents({ perPage, page }).then(result => {
-            setNews(old => [...old, ...result]);
+            setNews(old => [...old, ...result.data]);
+            setTotalCount(result.totalCount);
         })
             .finally(() => {
                 setIsLoading(false);
@@ -43,7 +45,7 @@ export default function ImportsTab() {
                 }}
                 onLoadNext={() => setPage(page + 1)}
                 isRefreshing={isRefreshing}
-                isLoadingNext={isLoading && news.length > 0}
+                disableLoadNext={totalCount < (page * perPage)}
                 isFirstLoading={isLoading && news.length === 0}
                 items={news.map(newsItem => ({
                     id: newsItem.id,
