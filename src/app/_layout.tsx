@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
-import { ThemeProvider, DarkTheme as DefaultDarkTheme } from '@react-navigation/native';
+import { ThemeProvider, DarkTheme as DefaultDarkTheme } from 'expo-router/react-navigation';
 import { DarkTheme } from './../shared/themes/DarkTheme';
 
 import "./../global.css";
