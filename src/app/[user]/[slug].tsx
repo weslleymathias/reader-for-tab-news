@@ -69,20 +69,22 @@ export default function Reader() {
 
             {data && (
                 <View className="flex-1 px-1 gap-1 flex-row">
-                    <View className="px-1 gap-2 items-center bg-green-700">
-                        <Text className="text-text">
+                    <View className="px-1 gap-2 items-center">
+                        <Text className="text-textMuted text-base font-family-regular">
                             7
                         </Text>
+
+                        <View className="w-px h-full bg-border" />
                     </View>
                     <View className="flex-1 gap-2">
                         <View className="gap-2 flex-row">
                             <Text className="font-family-regular text-sm bg-highlight text-textHighlight px-1 py-0.5 rounded">
                                 {data.owner_username}
                             </Text>
-                            <Text className="text-text font-family-regular text-sm">
-                                5 minutos
+                            <Text className="text-textMuted font-family-regular text-sm">
+                                {Math.ceil(data.body.split(/\s+/).length / 200)} min de leitura
                             </Text>
-                            <Text className="text-text font-family-regular text-sm">
+                            <Text className="text-textMuted font-family-regular text-sm">
                                 {formatDistanceToNow(data.publishedAt, { addSuffix: true, locale: ptBR })}
                             </Text>
                         </View>
