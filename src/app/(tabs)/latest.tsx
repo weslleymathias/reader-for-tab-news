@@ -41,7 +41,7 @@ export default function LatestTab() {
 
             <NewsList
                 header={<Header title="Relevantes" />}
-                onItemPress={(item) => router.push(`/${item.authorName}/${item.id}`)}
+                onItemPress={(item) => router.push(`/${item.authorName}/${item.slug}`)}
                 onRefresh={() => refetch()}
                 onLoadNext={() => fetchNextPage()}
                 isRefreshing={isRefetching}
