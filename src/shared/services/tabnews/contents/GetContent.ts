@@ -23,10 +23,10 @@ export interface IContent {
 }
 
 export type TContentResult = Omit<IContent, 'created_at' | 'deleted_at' | 'published_at' | 'updated_at'> & {
-    created_at: Date;
-    deleted_at: Date | null;
-    published_at: Date;
-    updated_at: Date;
+    createdAt: Date;
+    deletedAt: Date | null;
+    publishedAt: Date;
+    updatedAt: Date;
 }
 
 interface IGetContentParams {
@@ -36,13 +36,13 @@ interface IGetContentParams {
 
 export const getContent = async (params: IGetContentParams): Promise<TContentResult> => {
 
-    const { data } = await axiosInstance.get(`/contents/${params.user}/${params.user}`);
+    const { data } = await axiosInstance.get<IContent>(`/contents/${params.user}/${params.slug}`);
 
     return {
         ...data,
-        created_at: parseISO(data.created_at),
-        updated_at: parseISO(data.updated_at),
-        published_at: parseISO(data.published_at),
-        deleted_at: data.deleted_at ? parseISO(data.deleted_at) : null,
+        createdAt: parseISO(data.created_at),
+        updatedAt: parseISO(data.updated_at),
+        publishedAt: parseISO(data.published_at),
+        deletedAt: data.deleted_at ? parseISO(data.deleted_at) : null,
     };
 }

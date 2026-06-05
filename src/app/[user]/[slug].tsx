@@ -1,11 +1,13 @@
 import { useEffect } from "react";
-import { Share, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Share, Text, TouchableOpacity, View } from "react-native";
 import { TabNewsApi } from "../../shared/services/tabnews";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
 import { DarkTheme } from "../../shared/themes/DarkTheme";
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 export default function Reader() {
 
@@ -13,7 +15,7 @@ export default function Reader() {
     const insets = useSafeAreaInsets();
     const router = useRouter();
 
-    const { data } = useQuery({
+    const { data, isFetching } = useQuery({
         queryKey: ['news', user, slug],
         queryFn: async () => {
             if (Array.isArray(user)) return null;
@@ -56,9 +58,45 @@ export default function Reader() {
                 </TouchableOpacity>
             </View>
 
-            <View>
-                <Text>Content</Text>
-            </View>
+            {!data && isFetching && (
+                <View className="flex-1 items-center justify-center">
+                    <ActivityIndicator
+                        size='large'
+                        className="text-highlight"
+                    />
+                </View>
+            )}
+
+            {data && (
+                <View className="flex-1 px-1 gap-1 flex-row">
+                    <View className="px-1 gap-2 items-center bg-green-700">
+                        <Text className="text-text">
+                            7
+                        </Text>
+                    </View>
+                    <View className="flex-1 gap-2">
+                        <View className="gap-2 flex-row">
+                            <Text className="font-family-regular text-sm bg-highlight text-textHighlight px-1 py-0.5 rounded">
+                                {data.owner_username}
+                            </Text>
+                            <Text className="text-text font-family-regular text-sm">
+                                5 minutos
+                            </Text>
+                            <Text className="text-text font-family-regular text-sm">
+                                {formatDistanceToNow(data.publishedAt, { addSuffix: true, locale: ptBR })}
+                            </Text>
+                        </View>
+                        <View className="flex-1 gap-2 bg-red-700">
+                            <Text className="text-text">
+                                Markdown
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            )}
+
+
+
         </>
     );
 }

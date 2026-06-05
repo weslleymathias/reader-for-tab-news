@@ -18,6 +18,6 @@
     --color-border: #3D444D;
     --color-paper: #151B23;
     --color-textMuted: #9198A1;
-    --color-highlight: #388BFD;
+    --color-highlight: rgba(56, 139, 253, 0.1);
     --color-textHighlight: #388BFD;
 }
