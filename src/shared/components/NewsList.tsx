@@ -3,6 +3,7 @@ import { NewsListItem, NewsListItemSkeleton } from "./NewsListItem";
 
 interface INewsListItem {
     id: string;
+    slug: string;
     title: string;
     publishedAt: Date;
     authorName: string;
@@ -16,11 +17,10 @@ interface INewsListProps {
     onRefresh(): void;
     isRefreshing: boolean;
     onLoadNext(): void;
-    isFirstLoading: boolean;
     disableLoadNext: boolean;
 }
 
-export const NewsList = ({ items, header, onItemPress, onRefresh, isRefreshing, onLoadNext, disableLoadNext, isFirstLoading }: INewsListProps) => {
+export const NewsList = ({ items, header, onItemPress, onRefresh, isRefreshing, onLoadNext, disableLoadNext }: INewsListProps) => {
 
     return (
         <FlatList
@@ -46,7 +46,7 @@ export const NewsList = ({ items, header, onItemPress, onRefresh, isRefreshing, 
             )
                 : undefined
             }
-            onEndReachedThreshold={1}
+            onEndReachedThreshold={2.5}
             onEndReached={!disableLoadNext ? undefined : onLoadNext}
         />
     );

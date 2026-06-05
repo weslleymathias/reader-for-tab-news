@@ -4,8 +4,11 @@ import { NewsList } from "../../shared/components/NewsList";
 import { TabNewsApi } from "../../shared/services/tabnews";
 import { TContentResult } from "../../shared/services/tabnews/contents/ListContents";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useRouter } from "expo-router";
 
 export default function ImportantTab() {
+
+    const router = useRouter();
 
     const { data: news, isLoading, isRefetching, refetch, fetchNextPage, hasNextPage } = useInfiniteQuery<TContentResult>({
         queryKey: ['news', { strategy: 'relevant' }],
@@ -38,15 +41,15 @@ export default function ImportantTab() {
 
             <NewsList
                 header={<Header title="Relevantes" />}
-                onItemPress={console.log}
+                onItemPress={(item) => router.push(`/${item.authorName}/${item.id}`)}
                 onRefresh={() => refetch()}
                 onLoadNext={() => fetchNextPage()}
                 isRefreshing={isRefetching}
-                disableLoadNext={!hasNextPage}
-                isFirstLoading={isLoading}
+                disableLoadNext={!hasNextPage && !isLoading}
                 items={
                     allNews.map(newsItem => ({
                         id: newsItem.id,
+                        slug: newsItem.slug,
                         title: newsItem.title,
                         publishedAt: newsItem.created_at,
                         authorName: newsItem.owner_username,

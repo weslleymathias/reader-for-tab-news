@@ -49,7 +49,7 @@ const CustomTabButton = ({ isFocused, iconName, label, ...props }: TCustomTabPro
 
             }}>
             <MaterialIcons name={iconName as 'style'} size={24} color={isFocused ? DarkTheme.colors.highlight : DarkTheme.colors.text} />
-            <Text className={isFocused ? 'text-highlight' : 'text-text'}>{label}</Text>
+            <Text className={'text-base font-family-regular' + (isFocused ? 'text-highlight' : 'text-text')}>{label}</Text>
 
         </Pressable>
     );
