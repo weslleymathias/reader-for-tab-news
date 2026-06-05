@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ActivityIndicator, Share, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, ScrollView, Share, Text, TouchableOpacity, View } from "react-native";
 import { TabNewsApi } from "../../shared/services/tabnews";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
@@ -8,6 +8,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { DarkTheme } from "../../shared/themes/DarkTheme";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import Markdown from 'react-native-markdown-display';
+import { MarkdownRender } from "../../shared/components/MarkdownRender";
 
 export default function Reader() {
 
@@ -26,7 +28,7 @@ export default function Reader() {
     });
 
     return (
-        <>
+        <ScrollView>
             <View style={{ height: insets.top }} />
             <View className='gap-2 px-2 py-4 flex-row items-center'>
                 <TouchableOpacity onPress={() => router.back()}>
@@ -71,13 +73,13 @@ export default function Reader() {
                 <View className="flex-1 px-1 gap-1 flex-row">
                     <View className="px-1 gap-2 items-center">
                         <Text className="text-textMuted text-base font-family-regular">
-                            7
+                            {data.children_deep_count}
                         </Text>
 
                         <View className="w-px h-full bg-border" />
                     </View>
-                    <View className="flex-1 gap-2">
-                        <View className="gap-2 flex-row">
+                    <View className="gap-2">
+                        <View className="gap-2 flex-row items-center">
                             <Text className="font-family-regular text-sm bg-highlight text-textHighlight px-1 py-0.5 rounded">
                                 {data.owner_username}
                             </Text>
@@ -88,17 +90,13 @@ export default function Reader() {
                                 {formatDistanceToNow(data.publishedAt, { addSuffix: true, locale: ptBR })}
                             </Text>
                         </View>
-                        <View className="flex-1 gap-2 bg-red-700">
-                            <Text className="text-text">
-                                Markdown
-                            </Text>
+                        <View className="gap-2">
+                            <MarkdownRender content={data.body} />
                         </View>
                     </View>
                 </View>
             )}
 
-
-
-        </>
+        </ScrollView>
     );
 }

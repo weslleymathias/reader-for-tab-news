@@ -1,5 +1,4 @@
 import { parseISO } from "date-fns";
-import { NewsListItem } from "../../../components/NewsListItem";
 import { axiosInstance } from "../AxiosInstance";
 
 export type TContentStatus = 'published';
