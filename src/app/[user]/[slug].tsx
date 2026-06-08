@@ -10,6 +10,7 @@ import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import Markdown from 'react-native-markdown-display';
 import { MarkdownRender } from "../../shared/components/MarkdownRender";
+import { Comment } from "../../shared/components/Comment";
 
 export default function Reader() {
 
@@ -27,13 +28,23 @@ export default function Reader() {
         }
     });
 
-    useEffect(() => {
-        if (Array.isArray(user)) return;
-        if (Array.isArray(slug)) return;
+    const { data: commentsData, isFetching: commentsIsfetching } = useQuery({
+        queryKey: ['news', user, slug, 'comments'],
+        queryFn: async () => {
+            if (Array.isArray(user)) return null;
+            if (Array.isArray(slug)) return null;
 
-        TabNewsApi.contents.comments.getComments({ user, slug }).then(console.log);
+            return await TabNewsApi.contents.comments.getComments({ user, slug });
+        }
+    });
 
-    }, [])
+    // useEffect(() => {
+    //     if (Array.isArray(user)) return;
+    //     if (Array.isArray(slug)) return;
+
+    //     TabNewsApi.contents.comments.getComments({ user, slug }).then(console.log);
+
+    // }, [])
 
     return (
         <ScrollView>
@@ -78,7 +89,7 @@ export default function Reader() {
             )}
 
             {data && (
-                <View className="flex-1 px-1 pr-3 pb-40 gap-1 flex-row">
+                <View className="flex-1 px-1 pr-3 mb-2 gap-1 flex-row">
                     <View className="px-2 gap-2 items-center">
                         <Text className="text-textMuted text-base font-family-regular">
                             {data.children_deep_count}
@@ -100,6 +111,16 @@ export default function Reader() {
                         </View>
                         <MarkdownRender content={data.body} />
                     </View>
+                </View>
+            )}
+
+            {commentsData && (
+                <View className="border gap-4 border-highlight px-3 py-4 rounded-lg mx-2 bg-highlight">
+                    <Text className="text-text font-family-bold text-lg">Comentários</Text>
+
+                    {commentsData.map(comment => (
+                        <Comment comment={comment} key={comment.id} />
+                    ))}
                 </View>
             )}
 
