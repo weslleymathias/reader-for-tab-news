@@ -6,50 +6,50 @@ export type TContentType = 'content' | 'comment';
 
 export interface IContent {
     id: string;
-    slug: string;
+    slug: string | null;
 
-    body: string;
+    body: string | null;
     title: string | null;
 
     type: TContentType;
-    status: TContentStatus;
+    status: TContentStatus | null;
 
-    owner_id: string;
-    owner_username: string;
+    owner_id: string | null;
+    owner_username: string | null;
 
     parent_id: string | null;
 
     source_url: string | null;
 
-    created_at: string;
-    updated_at: string;
-    published_at: string;
+    created_at: string | null;
+    updated_at: string | null;
+    published_at: string | null;
     deleted_at: string | null;
 
     children: IContent[];
     children_deep_count: number;
 
-    tabcoins: number;
-    tabcoins_credit: number;
-    tabcoins_debit: number;
+    tabcoins: number | null;
+    tabcoins_credit: number | null;
+    tabcoins_debit: number | null;
 }
 
 export type TContentList = IContent[];
 
 export type TContentResult = Omit<IContent, 'children' | 'created_at' | 'deleted_at' | 'published_at' | 'updated_at'> & {
-    createdAt: Date;
+    createdAt: Date | null;
     deletedAt: Date | null;
-    publishedAt: Date;
-    updatedAt: Date;
+    publishedAt: Date | null;
+    updatedAt: Date | null;
     children: TContentResult[];
 }
 
 const mapContent = (content: IContent): TContentResult => {
     return {
         ...content,
-        createdAt: parseISO(content.created_at),
-        updatedAt: parseISO(content.updated_at),
-        publishedAt: parseISO(content.published_at),
+        createdAt: content.created_at ? parseISO(content.created_at) : null,
+        updatedAt: content.updated_at ? parseISO(content.updated_at) : null,
+        publishedAt: content.published_at ? parseISO(content.published_at) : null,
         deletedAt: content.deleted_at ? parseISO(content.deleted_at) : null,
         children: content.children.map(childContent => mapContent(childContent)),
     }

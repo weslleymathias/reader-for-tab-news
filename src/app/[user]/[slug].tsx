@@ -92,7 +92,7 @@ export default function Reader() {
                 <View className="flex-1 px-1 pr-3 mb-2 gap-1 flex-row">
                     <View className="px-2 gap-2 items-center">
                         <Text className="text-textMuted text-base font-family-regular">
-                            {data.children_deep_count}
+                            {data.tabcoins}
                         </Text>
 
                         <View className="w-px flex-1 bg-border" />
