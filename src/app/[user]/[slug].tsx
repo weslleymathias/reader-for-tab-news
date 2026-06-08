@@ -27,6 +27,14 @@ export default function Reader() {
         }
     });
 
+    useEffect(() => {
+        if (Array.isArray(user)) return;
+        if (Array.isArray(slug)) return;
+
+        TabNewsApi.contents.comments.getComments({ user, slug }).then(console.log);
+
+    }, [])
+
     return (
         <ScrollView>
             <View style={{ height: insets.top }} />
