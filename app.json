@@ -22,7 +22,8 @@
         "backgroundColor": "#343434",
         "foregroundImage": "./assets/adaptive-icon.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.weslleymathias10.readerfortabnews"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -39,11 +40,17 @@
           "image": "./assets/splash-icon-light.png",
           "dark": {
             "backgroundColor": "#343434",
-          "image": "./assets/splash-icon-dark.png"
+            "image": "./assets/splash-icon-dark.png"
           }
         }
       ],
       "expo-status-bar"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "7b32657d-0939-4da8-b970-34269106af99"
+      }
+    }
   }
 }
