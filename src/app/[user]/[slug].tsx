@@ -28,7 +28,7 @@ export default function Reader() {
         }
     });
 
-    const { data: commentsData, isFetching: commentsIsfetching } = useQuery({
+    const { data: commentsData } = useQuery({
         queryKey: ['news', user, slug, 'comments'],
         queryFn: async () => {
             if (Array.isArray(user)) return null;
@@ -124,6 +124,7 @@ export default function Reader() {
                 </View>
             )}
 
+            <View className="h-40" />
         </ScrollView>
     );
 }

@@ -11,7 +11,7 @@ interface ICommentProps {
 export const Comment = ({ comment }: ICommentProps) => {
 
     return (
-        <View className="flex-1 px-1 pr-3 mb-2 gap-1 flex-row">
+        <View className="flex-1 gap-1 flex-row">
             <View className="px-2 gap-2 items-center">
                 <Text className="text-textMuted text-base font-family-regular">
                     {comment.children_deep_count}
@@ -24,14 +24,16 @@ export const Comment = ({ comment }: ICommentProps) => {
                     <Text className="font-family-regular text-sm bg-highlight text-textHighlight px-1 py-0.5 rounded">
                         {comment.owner_username}
                     </Text>
-                    <Text className="text-textMuted font-family-regular text-sm">
-                        {Math.ceil(comment.body.split(/\s+/).length / 200)} min de leitura
-                    </Text>
+
                     <Text className="text-textMuted font-family-regular text-sm">
                         {formatDistanceToNow(comment.publishedAt, { addSuffix: true, locale: ptBR })}
                     </Text>
                 </View>
                 <MarkdownRender content={comment.body} />
+
+                {comment.children.map(childComment => (
+                    <Comment comment={childComment} key={childComment.id} />
+                ))}
             </View>
         </View>
     );
