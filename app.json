@@ -1,22 +1,26 @@
 {
   "expo": {
-    "name": "reader-for-tab-news",
+    "name": "Reader for TabNews",
     "slug": "reader-for-tab-news",
+    "description": "Permite a leitura de notícias atualizadas do site tab News",
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "readerfortabnews",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
-    "backgroundColor": "#15181D",
+    "backgroundColor": "#ffffff",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": {
+        "dark": "./assets/ios-dark.png",
+        "light": "./assets/ios-light.png",
+        "tinted": "./assets/ios-tinted.png"
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "backgroundColor": "#343434",
+        "foregroundImage": "./assets/adaptive-icon.png"
       },
       "predictiveBackGestureEnabled": false
     },
@@ -25,8 +29,20 @@
     },
     "plugins": [
       "expo-font",
-      "expo-splash-screen",
       "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff",
+          "image": "./assets/splash-icon-light.png",
+          "dark": {
+            "backgroundColor": "#343434",
+          "image": "./assets/splash-icon-dark.png"
+          }
+        }
+      ],
       "expo-status-bar"
     ]
   }
