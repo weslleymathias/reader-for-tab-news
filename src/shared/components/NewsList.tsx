@@ -47,7 +47,7 @@ export const NewsList = ({ items, header, onItemPress, onRefresh, isRefreshing, 
                 : undefined
             }
             onEndReachedThreshold={2.5}
-            onEndReached={!disableLoadNext ? undefined : onLoadNext}
+            onEndReached={disableLoadNext ? undefined : onLoadNext}
         />
     );
 
